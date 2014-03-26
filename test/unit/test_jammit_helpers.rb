@@ -60,6 +60,8 @@ class JammitHelpersTest < ActionView::TestCase
   end
 
   def test_individual_assets_in_development
+    setup_with_controller
+    config.assets_dir = "fixtures"
     Jammit.instance_variable_set(:@package_assets, false)
     assert include_stylesheets(:css_test) == File.read('test/fixtures/tags/css_individual_includes.html')
     assert include_javascripts(:js_test_with_templates) == File.read('test/fixtures/tags/js_individual_includes.html')
@@ -68,6 +70,8 @@ class JammitHelpersTest < ActionView::TestCase
   end
 
   def test_individual_assets_while_debugging
+    setup_with_controller
+    config.assets_dir = "fixtures"
     @debug = true
     assert include_stylesheets(:css_test) == File.read('test/fixtures/tags/css_individual_includes.html')
     assert include_javascripts(:js_test_with_templates) == File.read('test/fixtures/tags/js_individual_includes.html')
