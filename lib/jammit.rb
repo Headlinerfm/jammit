@@ -57,7 +57,7 @@ module Jammit
                   :javascript_compressor, :compressor_options, :css_compressor,
                   :css_compressor_options, :template_extension,
                   :template_extension_matcher, :allow_debugging,
-                  :rewrite_relative_paths, :public_root
+                  :rewrite_relative_paths, :public_root, :cache_bust_css
     attr_accessor :javascript_compressors, :css_compressors
   end
 
@@ -92,6 +92,7 @@ module Jammit
     @mhtml_enabled          = @embed_assets && @embed_assets != "datauri"
     @compressor_options     = symbolize_keys(conf[:compressor_options] || {})
     @css_compressor_options = symbolize_keys(conf[:css_compressor_options] || {})
+    @cache_bust_css         = !(conf[:cache_bust_css] == false)
     set_javascript_compressor(conf[:javascript_compressor])
     set_css_compressor(conf[:css_compressor])
     set_package_assets(conf[:package_assets])
